@@ -3,6 +3,7 @@ import { BrowserRouter, NavLink, } from 'react-router-dom'
 import { Layout, Menu, Icon } from 'antd'
 
 import "./index.css"
+import RouterRender from '../router/router';
 
 const { Header, Sider, Content } = Layout;
 const { useState, useEffect } = React
@@ -44,8 +45,7 @@ const LayoutComponent: React.FC = (props) => {
               minHeight: 280,
             }}
           >
-            <p>123</p>
-            <p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p><p>123</p>
+            <RouterRender />
           </Content>
         </Layout>
       </Layout>

@@ -3,6 +3,7 @@ import ReactDom from 'react-dom'
 import { Button } from 'antd'
 import "antd/dist/antd.css"
 import LayoutComponent from './layout';
+import RouterRender from './router/router';
 // import "./app.less"
 
 class App extends React.Component {
