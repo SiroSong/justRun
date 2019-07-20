@@ -8,10 +8,11 @@ module.exports = (env, args) => ({
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
+    publicPath: "/"
   },
   module: {
     rules: [
-      { test: /\.tsx$/, loaders: ['ts-loader'] },
+      { test: /\.(ts|tsx)$/, loaders: ['ts-loader'] },
       { test: /\.(js|jsx)$/, use: [{ loader: "babel-loader", options: { compact: false } }]},
       { 
         test: /\.css$/, 
@@ -27,6 +28,7 @@ module.exports = (env, args) => ({
   mode: "development",
   devServer: {
     hot: true,
+    historyApiFallback: true
     // noInfo: true,
   },
   plugins: [

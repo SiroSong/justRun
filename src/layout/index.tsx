@@ -3,30 +3,49 @@ import { BrowserRouter, NavLink, } from 'react-router-dom'
 import { Layout, Menu, Icon } from 'antd'
 
 import "./index.css"
-import RouterRender from '../router/router';
+import routerConfig, { RouterConfig } from '../router/router.config';
+import SubMenu from 'antd/lib/menu/SubMenu';
 
 const { Header, Sider, Content } = Layout;
 const { useState, useEffect } = React
 
+const MenuRender = (routes: RouterConfig) => {
+  return routes.routes && routes.routes.map((route: RouterConfig) => {
+    if (route.routes) {
+      return (
+        <SubMenu
+          key={route.path}
+          title={
+            <span>
+              <Icon type={route.icon} />
+              <span>{route.title}</span>
+            </span>
+          }
+        >
+          { MenuRender(route) }
+        </SubMenu>
+      )
+    } else {
+      return (
+        <Menu.Item>
+          <NavLink to={route.path}>
+            <span>123123</span>
+          </NavLink>
+        </Menu.Item>
+      )
+    }
+  })
+}
+
 const LayoutComponent: React.FC = (props) => {
-  const [collapsed, setCollapsed] = useState(true)
+  const [collapsed, setCollapsed] = useState(false)
+  console.log(props)
   return (
     <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed} className="layout-sider">
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span>nav 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span>nav 2</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="upload" />
-              <span>nav 3</span>
-            </Menu.Item>
+            { MenuRender(routerConfig[0]) }
           </Menu>
         </Sider>
         <Layout>
@@ -45,7 +64,7 @@ const LayoutComponent: React.FC = (props) => {
               minHeight: 280,
             }}
           >
-            <RouterRender />
+            { props.children }
           </Content>
         </Layout>
       </Layout>

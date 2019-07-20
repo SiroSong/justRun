@@ -1,32 +1,33 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
 import Home from '../pages/home';
-import routerConfig from './router.config'
+import routerConfig, { RouterConfig } from './router.config'
 
-type RouterConfig = {
-  path: string,
-  component?: React.ComponentType
+const loop = (routes: RouterConfig[] = []) => {
+  return routes && routes.map((value: RouterConfig) => {
+    if (value.component && !value.routes) {
+      return (
+        <Route key={value.path} path={value.path} component={value.component} />
+      )
+    } else if (value.component && value.routes) {
+      return (
+        <Route key={value.path} path={value.path} render={(props) => (
+          <value.component>
+            { loop(value.routes) }
+          </value.component>
+        )} />
+      )
+    }
+  })
 }
 
-const RouterRender: React.FC = (props) => {
-  const Home1 = require('../pages/home').default
-  console.log(routerConfig)
+const LayoutRender: React.FC = (props) => {
+  let L = routerConfig
   return (
     <Router>
-      { formatRouter(routerConfig) }
-      {/* <Route exact path="/" component={Home1} /> */}
+      { loop(routerConfig) }
     </Router>
   )
 }
-const formatRouter = (RC:RouterConfig[]) => {
-  let routers: any[] = []
-  RC.forEach((router: RouterConfig) => {
-    let a = `${router.component}`
-    routers.push(
-      <Route exact path={router.path} component={router.component} key={router.path} />
-    )
-  })
-  return routers
-}
 
-export default RouterRender
+export default LayoutRender
