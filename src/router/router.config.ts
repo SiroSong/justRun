@@ -4,6 +4,7 @@ export interface RouterConfig {
   routes?: RouterConfig[],
   title?: string,
   icon?: string,
+  visible?: boolean
 }
 const routerConfig: RouterConfig[] = [
   {
@@ -11,11 +12,12 @@ const routerConfig: RouterConfig[] = [
     component: require("../layout/index").default,
     routes: [
       {
-        path: '/',
+        path: '/home',
         title: '1122221',
         icon: 'user',
         routes: [
-          { path: "/index", component: require("../pages/home").default }
+          { path: "/home/index", title: '444', component: require("../pages/home").default },
+          { path: "/home/about", title: '344', component: require("../pages/about").default },
         ]
       },
       // { path: '/about', component: require("../pages/about").default }

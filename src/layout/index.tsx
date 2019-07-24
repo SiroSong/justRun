@@ -26,10 +26,10 @@ const MenuRender = (routes: RouterConfig) => {
         </SubMenu>
       )
     } else {
-      return (
-        <Menu.Item>
+      return route.visible !== true && (
+        <Menu.Item key={route.path}>
           <NavLink to={route.path}>
-            <span>123123</span>
+            <span>{route.title}</span>
           </NavLink>
         </Menu.Item>
       )
@@ -39,7 +39,6 @@ const MenuRender = (routes: RouterConfig) => {
 
 const LayoutComponent: React.FC = (props) => {
   const [collapsed, setCollapsed] = useState(false)
-  console.log(props)
   return (
     <Layout>
         <Sider trigger={null} collapsible collapsed={collapsed} className="layout-sider">
