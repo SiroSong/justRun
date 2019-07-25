@@ -36,8 +36,13 @@ module.exports = (env, args) => ({
       template: 'src/index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   resolve: {
     // 首先寻找模块中的 .ts(x) 文件, 然后是 .js 文件
     extensions: ['.ts', '.tsx', '.js'],
