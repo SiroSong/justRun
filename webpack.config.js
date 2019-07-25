@@ -44,10 +44,7 @@ module.exports = (env, args) => ({
     }
   },
   resolve: {
-    // 首先寻找模块中的 .ts(x) 文件, 然后是 .js 文件
     extensions: ['.ts', '.tsx', '.js'],
-
-    // 在模块中添加 src, 当你导入文件时，可以将 src 作为相关路径
     modules: ['src', 'node_modules'],
   },
 })
