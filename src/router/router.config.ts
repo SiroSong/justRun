@@ -16,7 +16,7 @@ const routerConfig: RouterConfig[] = [
         title: '1122221',
         icon: 'user',
         routes: [
-          { path: "/home/index", title: '444', component: import("../pages/home") },
+          { path: "/home/index", title: '444', component: require("../pages/home").default },
           { path: "/home/about", title: '344', component: require("../pages/about").default },
         ]
       },
