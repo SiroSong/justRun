@@ -3,7 +3,8 @@ import { BrowserRouter, NavLink, } from 'react-router-dom'
 import { Layout, Menu, Icon } from 'antd'
 
 import "./index.css"
-import routerConfig, { RouterConfig } from '../router/router.config';
+import routerConfig from '../router/router.config';
+import RouterConfig from '../router/type'
 import SubMenu from 'antd/lib/menu/SubMenu';
 
 const { Header, Sider, Content } = Layout;

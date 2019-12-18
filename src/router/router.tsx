@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
-import routerConfig, { RouterConfig } from './router.config'
+import routerConfig from './router.config'
+import RouterConfig from './type'
 
 const loop:any = (routes: RouterConfig[] = []) => {
   return routes && routes.map((value: RouterConfig) => {

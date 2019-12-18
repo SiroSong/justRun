@@ -1,11 +1,5 @@
-export interface RouterConfig {
-  path: string,
-  component?: any
-  routes?: RouterConfig[],
-  title?: string,
-  icon?: string,
-  visible?: boolean
-}
+import RouterConfig from './type'
+
 const routerConfig: RouterConfig[] = [
   {
     path: '/',
@@ -13,11 +7,11 @@ const routerConfig: RouterConfig[] = [
     routes: [
       {
         path: '/home',
-        title: '1122221',
+        title: '一级菜单',
         icon: 'user',
         routes: [
-          { path: "/home/index", title: '444', component: require("../pages/home").default },
-          { path: "/home/about", title: '344', component: require("../pages/about").default },
+          { path: "/home/index", title: '二级菜单1', component: require("../pages/home").default },
+          { path: "/home/about", title: '二级菜单2', component: require("../pages/about").default },
         ]
       },
       // { path: '/about', component: require("../pages/about").default }
