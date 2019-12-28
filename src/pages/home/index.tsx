@@ -2,15 +2,28 @@ import React from 'react'
 import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
 import { IProps } from './type'
+import { Consumer } from '../../redux/redux';
+import { Wrapper } from '../../redux/Wrapper'
 
-const Home:React.FC<IProps> = (props) => {
+class Home extends React.Component {
 
-    return (
-        <div>hell0
-			<Link to="/aout">22222</Link>
-			<Route exact path="/aout" render={()=><div>2333333</div>}></Route>
-        </div>
-    )
+    componentWillMount () {
+
+    }
+
+    componentDidMount () {
+        console.log(this.props, '-------')
+    }
+
+    render () {
+
+        return (
+            <div>
+                <Link to="/aout">2asdf22</Link>
+                <Route exact path="/aout" render={()=><div>2333333</div>}></Route>
+            </div>
+        )
+    }
 }
 
-export default Home
+export default Wrapper((state: Object) => state)(Home)
