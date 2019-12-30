@@ -1,11 +1,15 @@
 import React from 'react'
 import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
-import { IProps } from './type'
-import { Consumer } from '../../redux/redux';
 import { Wrapper } from '../../redux/Wrapper'
+import { Button } from 'antd';
 
-class Home extends React.Component {
+interface Iprops {
+    dispatch: Function,
+    num: number
+}
+
+class Home extends React.Component<Iprops> {
 
     componentWillMount () {
 
@@ -15,12 +19,20 @@ class Home extends React.Component {
         console.log(this.props, '-------')
     }
 
+    clickHandle = () => {
+        this.props.dispatch({
+            type: 'add',
+        })
+    }
+
     render () {
 
         return (
             <div>
                 <Link to="/aout">2asdf22</Link>
                 <Route exact path="/aout" render={()=><div>2333333</div>}></Route>
+                <div>{this.props.num}</div>
+                <Button onClick={this.clickHandle}>test</Button>
             </div>
         )
     }

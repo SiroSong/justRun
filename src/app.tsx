@@ -4,11 +4,14 @@ import { Button } from 'antd'
 import "antd/dist/antd.css"
 import PropTypes from 'prop-types'
 import LayoutRender from './router/router';
-import { createStore, Provider } from './redux/redux'
+import { createStore, MainContext } from './redux/redux'
 import { ActionType } from './redux/type'
 // import "./app.less"
 
 const reducer = (state: any, action: ActionType) => {
+	if (!state) {
+		return { num: 1 }
+	}
 	if (action.type === 'add') {
 		return {
 			num: state.num + 1
@@ -16,7 +19,7 @@ const reducer = (state: any, action: ActionType) => {
 	}
 }
 
-const store = createStore(reducer, {num: 0})
+const store = createStore(reducer)
 
 class App extends React.Component {
 
@@ -28,8 +31,8 @@ class App extends React.Component {
 }
 
 ReactDom.render(
-	<Provider value={store}>
+	<MainContext.Provider value={store}>
 		<App />
-	</Provider>,
+	</MainContext.Provider>,
 	document.getElementById("app")
 )

@@ -1,20 +1,32 @@
 import React from 'react'
-import { Consumer } from './redux'
+import { MainContext } from './redux'
 import { ReduxType } from './type'
 
 export const Wrapper = (mapStateToProps: Function) => (WrappedComponent: Function) => {
-    return class extends React.Component {
+    return class WrapperComponent extends React.Component {
+
+        state = {}
+
+        static contextType = MainContext
+
+        componentWillMount () {
+            const { subscribe }: ReduxType = this.context
+
+            this._update()
+            subscribe(this._update)
+        }
+
+        _update = () => {
+            const { getState }: ReduxType = this.context
+
+            this.setState({ ...mapStateToProps(getState()) })
+        }
         
         render () {
+            const { dispatch }: ReduxType = this.context
+
             return (
-                <Consumer>
-                    {
-                        (data: any) => {
-                            let newData: object = mapStateToProps(data.getState())
-                            return <WrappedComponent {...this.props} {...newData} dispatch={data.dispatch} />
-                        }
-                    }
-                </Consumer>
+                <WrappedComponent {...this.props} {...this.state} dispatch={dispatch} />
             )
         }
     }
