@@ -18,4 +18,3 @@ const createStore = (reducer: Function) => {
 }
 
 export { createStore, MainContext }
-
