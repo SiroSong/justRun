@@ -1,41 +1,23 @@
-import React from 'react'
-import { Route } from 'react-router';
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { Wrapper } from '../../redux/Wrapper'
 import { Button } from 'antd';
+import { Props } from 'redux/home';
 
-interface Iprops {
-    dispatch: Function,
-    num: number
-}
+function Home(props: Props) {
 
-class Home extends React.Component<Iprops> {
+	const clickHandle = () => {
+		props.dispatch({ type: 'add' })
+	}
 
-    componentWillMount () {
-
-    }
-
-    componentDidMount () {
-        console.log(this.props, '-------')
-    }
-
-    clickHandle = () => {
-        this.props.dispatch({
-            type: 'add',
-        })
-    }
-
-    render () {
-
-        return (
-            <div>
-                <Link to="/aout">2asdf22</Link>
-                <Route exact path="/aout" render={()=><div>2333333</div>}></Route>
-                <div>{this.props.num}</div>
-                <Button onClick={this.clickHandle}>test</Button>
-            </div>
-        )
-    }
+	return (
+		<div>
+			<Link to="/home/about">2asdf22</Link>
+			{/* <Route exact path="/about" render={() => <div>2333333</div>}></Route> */}
+			<div>{props.num}</div>
+			<Button onClick={clickHandle}>test</Button>
+		</div>
+	)
 }
 
 export default Wrapper((state: Object) => state)(Home)

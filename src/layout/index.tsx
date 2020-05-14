@@ -1,11 +1,9 @@
 import React from 'react'
 import { BrowserRouter, NavLink, } from 'react-router-dom'
 import { Layout, Menu, Icon } from 'antd'
+import SubMenu from 'antd/lib/menu/SubMenu';
 
 import "./index.css"
-import routerConfig from '../router/router.config';
-import RouterConfig from '../router/type'
-import SubMenu from 'antd/lib/menu/SubMenu';
 
 const { Header, Sider, Content } = Layout;
 const { useState, useEffect } = React
@@ -30,6 +28,7 @@ const MenuRender = (routes: RouterConfig) => {
       return route.visible !== true && (
         <Menu.Item key={route.path}>
           <NavLink to={route.path}>
+            <Icon type={route.icon} />
             <span>{route.title}</span>
           </NavLink>
         </Menu.Item>
@@ -38,36 +37,38 @@ const MenuRender = (routes: RouterConfig) => {
   })
 }
 
-const LayoutComponent: React.FC = (props) => {
+const LayoutComponent: React.FC<{
+  routeInfo: RouterConfig,
+  location: Location,
+}> = (props) => {
   const [collapsed, setCollapsed] = useState(false)
+  
   return (
     <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed} className="layout-sider">
-          <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            { MenuRender(routerConfig[0]) }
-          </Menu>
-        </Sider>
-        <Layout>
-          <Header style={{ background: '#fff', padding: 0 }}>
-            <Icon
-              className="trigger"
-              type={collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={() => setCollapsed(!collapsed)}
-            />
-          </Header>
-          <Content
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              background: '#fff',
-              minHeight: 280,
-            }}
-          >
-            { props.children }
-          </Content>
-        </Layout>
+      <Sider
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+        className="layout-sider"
+      >
+        <div className="logo" />
+        <Menu theme="dark" mode="inline" selectedKeys={[props.location.pathname]}>
+          { MenuRender(props.routeInfo) }
+        </Menu>
+      </Sider>
+      <Layout>
+        <Header className="header_layout">
+          <Icon
+            className="trigger"
+            type={collapsed ? 'menu-unfold' : 'menu-fold'}
+            onClick={() => setCollapsed(!collapsed)}
+          />
+        </Header>
+        <Content className="content_layout">
+          { props.children }
+        </Content>
       </Layout>
+    </Layout>
   )
 }
 

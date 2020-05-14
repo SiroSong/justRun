@@ -22,3 +22,13 @@
   height: 100vh;
   z-index: 999;
 }
+.header_layout {
+  background-color: white;
+  padding: 0px;
+}
+.content_layout {
+  margin: 24px 16px;
+  padding: 24px;
+  background-color: white;
+  min-height: 280px;
+}

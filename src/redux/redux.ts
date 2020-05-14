@@ -1,5 +1,4 @@
 import React from 'react'
-import { ActionType } from './type'
 
 const MainContext = React.createContext({})
 

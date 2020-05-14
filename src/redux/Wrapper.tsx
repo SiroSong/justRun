@@ -1,6 +1,5 @@
 import React from 'react'
 import { MainContext } from './redux'
-import { ReduxType } from './type'
 
 export const Wrapper = (mapStateToProps: Function) => (WrappedComponent: Function) => {
     return class WrapperComponent extends React.Component {
